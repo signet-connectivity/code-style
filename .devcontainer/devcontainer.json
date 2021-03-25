@@ -1,0 +1,23 @@
+{
+    "name": "ECS Signet",
+    "remoteUser": "code",
+    "dockerComposeFile": ["docker-compose.yml"],
+    "service": "php",
+    "workspaceFolder": "/workspace",
+    "settings": {
+        "terminal.integrated.shell.linux": "bash",
+        "dotfiles.repository": "signet-connectivity/dotfiles",
+        "dotfiles.targetPath": "~/dotfiles",
+        "dotfiles.installCommand": "~/dotfiles/install.sh"
+    },
+    // "shutdownAction": "none",
+    "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "redhat.vscode-yaml",
+        "esbenp.prettier-vscode",
+        "mehedidracula.php-namespace-resolver",
+        "editorconfig.editorconfig",
+        "mhutchie.git-graph",
+        "ms-vsliveshare.vsliveshare"
+    ]
+}

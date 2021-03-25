@@ -1,0 +1,37 @@
+{
+    "name": "signet/ecs",
+    "type": "library",
+    "description": "An ECS Signet code style package.",
+    "keywords": [
+        "package",
+        "ecs"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=8.0",
+        "slevomat/coding-standard": "dev-master",
+        "symplify/easy-coding-standard": "^9.2.1"
+    },
+    "require-dev": {
+        "overtrue/phplint": "^2.1.0"
+    },
+    "scripts": {
+        "check-style": "XDEBUG_MODE=off ecs check",
+        "fix-style": "XDEBUG_MODE=off ecs check --fix",
+        "lint": "XDEBUG_MODE=off phplint --exclude=vendor .",
+        "check-all": [
+            "composer lint",
+            "composer check-style"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

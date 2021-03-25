@@ -1,0 +1,7 @@
+!.env
+/coverage
+/composer.lock
+/vendor
+/.phplint-cache
+/.DS_Store
+/auth.json
