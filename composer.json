@@ -1,9 +1,10 @@
 {
-    "name": "signet/ecs",
+    "name": "signet/code-style",
     "type": "library",
-    "description": "An ECS Signet code style package.",
+    "description": "Signet's code style package.",
     "keywords": [
         "package",
+        "code style",
         "ecs"
     ],
     "license": "MIT",

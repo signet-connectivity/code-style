@@ -7,7 +7,7 @@ An ECS Signet codestyle package.
 You can install the package via composer:
 
 ```bash
-composer require signet/ecs
+composer require signet/code-style
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 use Symplify\EasyCodingStandard\ValueObject\Option;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->import(__DIR__ . '/vendor/signet/ecs/signet-ecs.php');
+    $containerConfigurator->import(__DIR__ . '/vendor/signet/code-style/signet-ecs.php');
 
     $services = $containerConfigurator->services();
 
@@ -41,16 +41,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 };
 ```
 
-If you already got an existing ecs.php and you want to use the `signet-ecs` style you can add the following line:
-
-```php
-// ...
-    $containerConfigurator->import(__DIR__ . '/vendor/signet/ecs/signet-ecs.php');
-// ...
-```
-
 **NOTE**:  
-`signet-ecs` applies the same fixers as the preconfigured ecs `PSR-12` set (see [SetList::PSR_12](https://github.com/symplify/easy-coding-standard/blob/master/src/ValueObject/Set/SetList.php#L19)).
+`signet-ecs` applies the same fixers as the preconfigured ecs `PSR-12` set (see
+[SetList::PSR_12](https://github.com/symplify/easy-coding-standard/blob/master/src/ValueObject/Set/SetList.php#L19)).
 
 ## Links
 
