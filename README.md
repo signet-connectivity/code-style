@@ -10,18 +10,6 @@ You can install the package via composer:
 composer require signet/ecs
 ```
 
-**NOTE**:  
-You might need to set the minimum stability to dev to allow usage of `dev-master`. This is currently needed for (better)
-PHP 8 support. Add the following keys to the root of your projects `composer.json`-file (prior to installing the
-`signet\ecs` package):
-
-```json
-{
-    "minimum-stability": "dev",
-    "prefer-stable": true
-}
-```
-
 ## Usage
 
 Add a `ecs.php` file to the root of your project (if it doesn't exist) with the below contents

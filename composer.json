@@ -9,14 +9,14 @@
     "license": "MIT",
     "require": {
         "php": ">=8.0",
-        "slevomat/coding-standard": "dev-master",
-        "symplify/easy-coding-standard": "^9.2.1"
+        "slevomat/coding-standard": "^7.0.1",
+        "symplify/easy-coding-standard": "^9.2.15"
     },
     "require-dev": {
         "overtrue/phplint": "^2.1.0"
     },
     "scripts": {
-        "check-style": "XDEBUG_MODE=off ecs check",
+        "check-style": "ecs check",
         "fix-style": "XDEBUG_MODE=off ecs check --fix",
         "lint": "XDEBUG_MODE=off phplint --exclude=vendor .",
         "check-all": [
@@ -31,7 +31,5 @@
     },
     "config": {
         "sort-packages": true
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
