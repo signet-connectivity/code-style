@@ -206,9 +206,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ]);
 
     // Custom Slevomat
-    $services->set(ParameterTypeHintSniff::class);
-    $services->set(PropertyTypeHintSniff::class);
-    $services->set(ReturnTypeHintSniff::class);
+    // $services->set(ParameterTypeHintSniff::class);
+    // $services->set(PropertyTypeHintSniff::class);
+    // $services->set(ReturnTypeHintSniff::class);
     $services->set(UselessConstantTypeHintSniff::class);
     $services->set(UnionTypeHintFormatSniff::class)
         ->property('withSpaces', 'no')
@@ -303,7 +303,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(TraitUseDeclarationSniff::class);
     $services->set(JumpStatementsSpacingSniff::class);
     $services->set(LanguageConstructWithParenthesesSniff::class);
-    $services->set(DisallowYodaComparisonSniff::class);
     $services->set(ArrowFunctionDeclarationSniff::class)
         ->property('allowMultiline', true);
     $services->set(RequireTrailingCommaInCallSniff::class);
