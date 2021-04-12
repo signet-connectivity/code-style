@@ -50,25 +50,66 @@ use PhpCsFixer\Fixer\Whitespace\LineEndingFixer;
 use PhpCsFixer\Fixer\Whitespace\NoSpacesInsideParenthesisFixer;
 use PhpCsFixer\Fixer\Whitespace\NoTrailingWhitespaceFixer;
 use PhpCsFixer\Fixer\Whitespace\SingleBlankLineAtEofFixer;
+use SlevomatCodingStandard\Sniffs\Arrays\MultiLineArrayEndBracketPlacementSniff;
+use SlevomatCodingStandard\Sniffs\Arrays\SingleLineArrayWhitespaceSniff;
 use SlevomatCodingStandard\Sniffs\Arrays\TrailingArrayCommaSniff;
 use SlevomatCodingStandard\Sniffs\Classes\ClassConstantVisibilitySniff;
 use SlevomatCodingStandard\Sniffs\Classes\ClassMemberSpacingSniff;
+use SlevomatCodingStandard\Sniffs\Classes\ClassStructureSniff;
 use SlevomatCodingStandard\Sniffs\Classes\ConstantSpacingSniff;
+use SlevomatCodingStandard\Sniffs\Classes\DisallowMultiConstantDefinitionSniff;
+use SlevomatCodingStandard\Sniffs\Classes\DisallowMultiPropertyDefinitionSniff;
 use SlevomatCodingStandard\Sniffs\Classes\EmptyLinesAroundClassBracesSniff;
+use SlevomatCodingStandard\Sniffs\Classes\MethodSpacingSniff;
+use SlevomatCodingStandard\Sniffs\Classes\ModernClassNameReferenceSniff;
+use SlevomatCodingStandard\Sniffs\Classes\ParentCallSpacingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\PropertySpacingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\RequireConstructorPropertyPromotionSniff;
+use SlevomatCodingStandard\Sniffs\Classes\RequireMultiLineMethodSignatureSniff;
+use SlevomatCodingStandard\Sniffs\Classes\SuperfluousAbstractClassNamingSniff;
+use SlevomatCodingStandard\Sniffs\Classes\SuperfluousInterfaceNamingSniff;
+use SlevomatCodingStandard\Sniffs\Classes\SuperfluousTraitNamingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\TraitUseDeclarationSniff;
+use SlevomatCodingStandard\Sniffs\Classes\UselessLateStaticBindingSniff;
+use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowContinueWithoutIntegerOperandInSwitchSniff;
+use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff;
+use SlevomatCodingStandard\Sniffs\ControlStructures\JumpStatementsSpacingSniff;
+use SlevomatCodingStandard\Sniffs\ControlStructures\LanguageConstructWithParenthesesSniff;
 use SlevomatCodingStandard\Sniffs\Exceptions\DeadCatchSniff;
+use SlevomatCodingStandard\Sniffs\Exceptions\RequireNonCapturingCatchSniff;
+use SlevomatCodingStandard\Sniffs\Functions\ArrowFunctionDeclarationSniff;
 use SlevomatCodingStandard\Sniffs\Functions\RequireTrailingCommaInCallSniff;
 use SlevomatCodingStandard\Sniffs\Functions\RequireTrailingCommaInDeclarationSniff;
+use SlevomatCodingStandard\Sniffs\Functions\StaticClosureSniff;
+use SlevomatCodingStandard\Sniffs\Functions\UnusedInheritedVariablePassedToClosureSniff;
+use SlevomatCodingStandard\Sniffs\Functions\UselessParameterDefaultValueSniff;
 use SlevomatCodingStandard\Sniffs\Namespaces\AlphabeticallySortedUsesSniff;
+use SlevomatCodingStandard\Sniffs\Namespaces\DisallowGroupUseSniff;
+use SlevomatCodingStandard\Sniffs\Namespaces\NamespaceDeclarationSniff;
 use SlevomatCodingStandard\Sniffs\Namespaces\UnusedUsesSniff;
 use SlevomatCodingStandard\Sniffs\Namespaces\UseFromSameNamespaceSniff;
+use SlevomatCodingStandard\Sniffs\Namespaces\UselessAliasSniff;
+use SlevomatCodingStandard\Sniffs\Namespaces\UseSpacingSniff;
+use SlevomatCodingStandard\Sniffs\Numbers\RequireNumericLiteralSeparatorSniff;
 use SlevomatCodingStandard\Sniffs\PHP\OptimizedFunctionsWithoutUnpackingSniff;
+use SlevomatCodingStandard\Sniffs\PHP\ShortListSniff;
+use SlevomatCodingStandard\Sniffs\PHP\UselessSemicolonSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\NullableTypeForNullDefaultValueSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\PropertyTypeHintSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\PropertyTypeHintSpacingSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\ReturnTypeHintSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\UnionTypeHintFormatSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\UselessConstantTypeHintSniff;
+use SlevomatCodingStandard\Sniffs\Variables\DisallowSuperGlobalVariableSniff;
+use SlevomatCodingStandard\Sniffs\Variables\UnusedVariableSniff;
+use SlevomatCodingStandard\Sniffs\Variables\UselessVariableSniff;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
+
+    $maxLineLength = 120;
 
     // PSR-2
     $services->set(EncodingFixer::class);
@@ -84,9 +125,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(LowercaseKeywordsFixer::class);
     $services->set(MethodArgumentSpaceFixer::class)
         ->call('configure', [
-            [
-                'ensure_fully_multiline' => true,
-            ],
+            ['ensure_fully_multiline' => true],
         ]);
     $services->set(NoBreakCommentFixer::class);
     $services->set(NoClosingTagFixer::class);
@@ -97,9 +136,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(SingleBlankLineAtEofFixer::class);
     $services->set(SingleClassElementPerStatementFixer::class)
         ->call('configure', [
-            [
-                'elements' => ['property'],
-            ],
+            ['elements' => ['property']],
         ]);
     // $services->set(SingleImportPerStatementFixer::class); // Disabled for PSR-12 compliance
     $services->set(SingleLineAfterImportsFixer::class);
@@ -114,15 +151,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(NoLeadingImportSlashFixer::class);
     $services->set(OrderedImportsFixer::class)
         ->call('configure', [
-            [
-                'importsOrder' => ['class', 'function', 'const'],
-            ],
+            ['importsOrder' => ['class', 'function', 'const']],
         ]);
     $services->set(DeclareEqualNormalizeFixer::class)
         ->call('configure', [
-            [
-                'space' => 'none',
-            ],
+            ['space' => 'none'],
         ]);
     $services->set(NewWithBracesFixer::class);
     $services->set(BracesFixer::class)
@@ -137,9 +170,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(NoBlankLinesAfterClassOpeningFixer::class);
     $services->set(VisibilityRequiredFixer::class)
         ->call('configure', [
-            [
-                'elements' => ['const', 'method', 'property'],
-            ],
+            ['elements' => ['const', 'method', 'property']],
         ]);
     // $services->set(BinaryOperatorSpacesFixer::class); // See custom section
     $services->set(TernaryOperatorSpacesFixer::class);
@@ -148,57 +179,146 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(NoTrailingWhitespaceFixer::class);
     $services->set(ConcatSpaceFixer::class)
         ->call('configure', [
-            [
-                'spacing' => 'one',
-            ],
+            ['spacing' => 'one'],
         ]);
     $services->set(NoSinglelineWhitespaceBeforeSemicolonsFixer::class);
     $services->set(NoWhitespaceBeforeCommaInArrayFixer::class);
     $services->set(WhitespaceAfterCommaInArrayFixer::class);
 
-    // Custom
+    // Custom PHP_CodeSniffer
     $services->set(FileHeaderSniff::class);
-    $services->set(TraitUseDeclarationSniff::class);
     $services->set(DisallowLongArraySyntaxSniff::class);
-    $services->set(DeclareStrictTypesFixer::class);
-    $services->set(UnusedUsesSniff::class);
-    $services->set(UseFromSameNamespaceSniff::class);
-    $services->set(OptimizedFunctionsWithoutUnpackingSniff::class);
-    $services->set(DeadCatchSniff::class);
-    $services->set(RequireTrailingCommaInCallSniff::class);
-    $services->set(RequireTrailingCommaInDeclarationSniff::class);
-    $services->set(RequireConstructorPropertyPromotionSniff::class);
-    $services->set(AlphabeticallySortedUsesSniff::class);
-    $services->set(ClassConstantVisibilitySniff::class);
-    $services->set(TrailingArrayCommaSniff::class);
     $services->set(ArrayIndentSniff::class);
-    $services->set(ClassMemberSpacingSniff::class);
     $services->set(CastSpacingSniff::class);
     $services->set(SpaceAfterCastSniff::class);
     $services->set(LineLengthSniff::class)
-        ->property('absoluteLineLimit', 120);
+        ->property('absoluteLineLimit', $maxLineLength);
     $services->set(FunctionSpacingSniff::class)
         ->property('spacing', 1)
         ->property('spacingBeforeFirst', 0)
         ->property('spacingAfterLast', 0);
-    $services->set(PropertySpacingSniff::class)
-        ->property('minLinesCountBeforeWithComment', 1)
-        ->property('maxLinesCountBeforeWithComment', 1)
-        ->property('minLinesCountBeforeWithoutComment', 0)
-        ->property('maxLinesCountBeforeWithoutComment', 1);
+
+    // Custom PhpCsFixer
+    $services->set(DeclareStrictTypesFixer::class);
+    $services->set(BinaryOperatorSpacesFixer::class)
+        ->call('configure', [
+            ['operators' => ['|' => null]], // TODO this should not be necessary
+        ]);
+
+    // Custom Slevomat
+    $services->set(ParameterTypeHintSniff::class);
+    $services->set(PropertyTypeHintSniff::class);
+    $services->set(ReturnTypeHintSniff::class);
+    $services->set(UselessConstantTypeHintSniff::class);
+    $services->set(UnionTypeHintFormatSniff::class)
+        ->property('withSpaces', 'no')
+        ->property('shortNullable', 'yes')
+        ->property('nullPosition', 'last');
+    // $services->set(ReferenceThrowableOnlySniff::class); // TODO check out impact first
+    $services->set(RequireNonCapturingCatchSniff::class);
+    $services->set(ClassStructureSniff::class)
+        ->property('enableFinalMethods', true)
+        ->property('groups', [
+            'uses',
+
+            'public constants',
+            'protected constants',
+            'private constants',
+
+            'public static properties',
+            'protected static properties',
+            'private static properties',
+
+            'public properties',
+            'protected properties',
+            'private properties',
+
+            'constructor',
+            'static constructors',
+            'destructor',
+
+            'public final methods',
+            'public static final methods',
+            'public abstract methods',
+            'public static abstract methods',
+            'public static methods',
+            'public methods',
+
+            'protected final methods',
+            'protected static final methods',
+            'protected abstract methods',
+            'protected static abstract methods',
+            'protected static methods',
+            'protected methods',
+
+            'private static methods',
+            'private methods',
+
+            'magic methods',
+        ]);
+    $services->set(RequireConstructorPropertyPromotionSniff::class);
+    $services->set(UselessLateStaticBindingSniff::class);
+    $services->set(DisallowContinueWithoutIntegerOperandInSwitchSniff::class);
+    $services->set(StaticClosureSniff::class);
+
+    // Custom Slevomat Cleaning (Dead Code detection)
+    $services->set(UnusedInheritedVariablePassedToClosureSniff::class);
+    $services->set(UselessParameterDefaultValueSniff::class);
+    $services->set(UnusedUsesSniff::class);
+    $services->set(UseFromSameNamespaceSniff::class);
+    $services->set(UselessAliasSniff::class);
+    $services->set(OptimizedFunctionsWithoutUnpackingSniff::class);
+    $services->set(UselessSemicolonSniff::class);
+    $services->set(DisallowSuperGlobalVariableSniff::class);
+    $services->set(UnusedVariableSniff::class)
+        ->property('ignoreUnusedValuesWhenOnlyKeysAreUsedInForeach', true);
+    $services->set(UselessVariableSniff::class);
+    $services->set(DeadCatchSniff::class);
+
+    // Custom Slevomat Formatting
+    $services->set(MultiLineArrayEndBracketPlacementSniff::class);
+    $services->set(SingleLineArrayWhitespaceSniff::class);
+    $services->set(TrailingArrayCommaSniff::class);
+    $services->set(ClassMemberSpacingSniff::class);
     $services->set(ConstantSpacingSniff::class)
         ->property('minLinesCountBeforeWithComment', 1)
         ->property('maxLinesCountBeforeWithComment', 1)
         ->property('minLinesCountBeforeWithoutComment', 0)
         ->property('maxLinesCountBeforeWithoutComment', 1);
+    $services->set(DisallowMultiConstantDefinitionSniff::class);
+    $services->set(DisallowMultiPropertyDefinitionSniff::class);
+    $services->set(MethodSpacingSniff::class);
+    $services->set(ModernClassNameReferenceSniff::class);
+    $services->set(ParentCallSpacingSniff::class);
+    $services->set(PropertySpacingSniff::class)
+        ->property('minLinesCountBeforeWithComment', 1)
+        ->property('maxLinesCountBeforeWithComment', 1)
+        ->property('minLinesCountBeforeWithoutComment', 0)
+        ->property('maxLinesCountBeforeWithoutComment', 1);
+    $services->set(RequireMultiLineMethodSignatureSniff::class)
+        ->property('minLineLength', $maxLineLength);
+    $services->set(SuperfluousAbstractClassNamingSniff::class);
+    $services->set(SuperfluousInterfaceNamingSniff::class);
+    $services->set(SuperfluousTraitNamingSniff::class);
+    $services->set(TraitUseDeclarationSniff::class);
+    $services->set(JumpStatementsSpacingSniff::class);
+    $services->set(LanguageConstructWithParenthesesSniff::class);
+    $services->set(DisallowYodaComparisonSniff::class);
+    $services->set(ArrowFunctionDeclarationSniff::class)
+        ->property('allowMultiline', true);
+    $services->set(RequireTrailingCommaInCallSniff::class);
+    $services->set(RequireTrailingCommaInDeclarationSniff::class);
+    $services->set(AlphabeticallySortedUsesSniff::class)
+        ->property('caseSensitive', true);
+    $services->set(NamespaceDeclarationSniff::class);
+    $services->set(UseSpacingSniff::class);
+    $services->set(RequireNumericLiteralSeparatorSniff::class);
+    $services->set(ShortListSniff::class);
+    $services->set(ClassConstantVisibilitySniff::class);
+    $services->set(NullableTypeForNullDefaultValueSniff::class);
+    $services->set(DisallowGroupUseSniff::class);
     $services->set(EmptyLinesAroundClassBracesSniff::class)
         ->property('linesCountAfterOpeningBrace', 0)
         ->property('linesCountBeforeClosingBrace', 0);
-    $services->set(BinaryOperatorSpacesFixer::class)
-        ->call('configure', [
-            [
-                'default' => BinaryOperatorSpacesFixer::SINGLE_SPACE,
-                'operators' => ['|' => null],
-            ],
-        ]);
+    $services->set(PropertyTypeHintSpacingSniff::class);
 };
