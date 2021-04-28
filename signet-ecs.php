@@ -298,7 +298,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(RequireMultiLineMethodSignatureSniff::class)
         ->property('minLineLength', $maxLineLength);
     $services->set(SuperfluousAbstractClassNamingSniff::class);
-    $services->set(SuperfluousInterfaceNamingSniff::class);
     $services->set(SuperfluousTraitNamingSniff::class);
     $services->set(TraitUseDeclarationSniff::class);
     $services->set(JumpStatementsSpacingSniff::class);
