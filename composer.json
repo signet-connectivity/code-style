@@ -10,7 +10,7 @@
     "license": "MIT",
     "require": {
         "php": ">=8.0",
-        "slevomat/coding-standard": "^7.0.1",
+        "slevomat/coding-standard": "dev-master#1122e79 as 7.0.8",
         "symplify/easy-coding-standard": "^9.2.15"
     },
     "require-dev": {
