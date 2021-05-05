@@ -120,7 +120,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(LowercaseKeywordsFixer::class);
     $services->set(MethodArgumentSpaceFixer::class)
         ->call('configure', [
-            ['ensure_fully_multiline' => true],
+            ['on_multiline' => 'ensure_fully_multiline'],
         ]);
     $services->set(NoBreakCommentFixer::class);
     $services->set(NoClosingTagFixer::class);
@@ -146,7 +146,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(NoLeadingImportSlashFixer::class);
     $services->set(OrderedImportsFixer::class)
         ->call('configure', [
-            ['importsOrder' => ['class', 'function', 'const']],
+            ['imports_order' => ['class', 'function', 'const']],
         ]);
     $services->set(DeclareEqualNormalizeFixer::class)
         ->call('configure', [
