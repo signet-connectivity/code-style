@@ -200,9 +200,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ]);
 
     // Custom Slevomat
-    // $services->set(ParameterTypeHintSniff::class);
-    // $services->set(PropertyTypeHintSniff::class);
-    // $services->set(ReturnTypeHintSniff::class);
     $services->set(UselessConstantTypeHintSniff::class);
     $services->set(UnionTypeHintFormatSniff::class)
         ->property('withSpaces', 'no')
