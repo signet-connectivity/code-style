@@ -81,7 +81,6 @@ use SlevomatCodingStandard\Sniffs\Functions\RequireTrailingCommaInDeclarationSni
 use SlevomatCodingStandard\Sniffs\Functions\StaticClosureSniff;
 use SlevomatCodingStandard\Sniffs\Functions\UnusedInheritedVariablePassedToClosureSniff;
 use SlevomatCodingStandard\Sniffs\Functions\UselessParameterDefaultValueSniff;
-use SlevomatCodingStandard\Sniffs\Namespaces\AlphabeticallySortedUsesSniff;
 use SlevomatCodingStandard\Sniffs\Namespaces\DisallowGroupUseSniff;
 use SlevomatCodingStandard\Sniffs\Namespaces\NamespaceDeclarationSniff;
 use SlevomatCodingStandard\Sniffs\Namespaces\UnusedUsesSniff;
@@ -301,8 +300,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->property('allowMultiline', true);
     $services->set(RequireTrailingCommaInCallSniff::class);
     $services->set(RequireTrailingCommaInDeclarationSniff::class);
-    $services->set(AlphabeticallySortedUsesSniff::class)
-        ->property('caseSensitive', true);
     $services->set(NamespaceDeclarationSniff::class);
     $services->set(UseSpacingSniff::class);
     $services->set(RequireNumericLiteralSeparatorSniff::class);
