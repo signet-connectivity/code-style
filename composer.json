@@ -10,8 +10,8 @@
     "license": "MIT",
     "require": {
         "php": ">=8.0",
-        "slevomat/coding-standard": "dev-master#27348e52a4ebb38aa8dfeb0442e5c62f632c6fe2 as 7.0.8",
-        "symplify/easy-coding-standard": "^9.3.1"
+        "slevomat/coding-standard": "^7.0.8",
+        "symplify/easy-coding-standard": "^9.3.11"
     },
     "require-dev": {
         "overtrue/phplint": "^2.1.0"
