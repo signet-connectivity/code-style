@@ -299,7 +299,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(RequireTrailingCommaInDeclarationSniff::class);
     $services->set(NamespaceDeclarationSniff::class);
     $services->set(UseSpacingSniff::class);
-    $services->set(RequireNumericLiteralSeparatorSniff::class);
+    $services->set(RequireNumericLiteralSeparatorSniff::class)
+        ->property('minDigitsBeforeDecimalPoint', 6);
     $services->set(ShortListSniff::class);
     $services->set(ClassConstantVisibilitySniff::class);
     $services->set(NullableTypeForNullDefaultValueSniff::class);
