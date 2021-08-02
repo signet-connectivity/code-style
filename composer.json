@@ -14,7 +14,7 @@
         "symplify/easy-coding-standard": "^9.3.11"
     },
     "require-dev": {
-        "overtrue/phplint": "^2.1.0"
+        "overtrue/phplint": "^3.0.3"
     },
     "scripts": {
         "checkstyle": "ecs check",
