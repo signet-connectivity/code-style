@@ -22,7 +22,9 @@
         "lint": "XDEBUG_MODE=off phplint --exclude=vendor .",
         "checkall": [
             "composer lint",
-            "composer checkstyle"
+            "composer checkstyle",
+            "composer outdated --minor-only --strict --direct",
+            "composer outdated --direct"
         ]
     },
     "extra": {
