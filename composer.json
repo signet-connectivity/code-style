@@ -17,12 +17,12 @@
         "overtrue/phplint": "^2.1.0"
     },
     "scripts": {
-        "check-style": "ecs check",
-        "fix-style": "XDEBUG_MODE=off ecs check --fix",
+        "checkstyle": "ecs check",
+        "fixstyle": "XDEBUG_MODE=off ecs check --fix",
         "lint": "XDEBUG_MODE=off phplint --exclude=vendor .",
-        "check-all": [
+        "checkall": [
             "composer lint",
-            "composer check-style"
+            "composer checkstyle"
         ]
     },
     "extra": {
