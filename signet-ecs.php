@@ -66,8 +66,6 @@ use SlevomatCodingStandard\Sniffs\Classes\ParentCallSpacingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\PropertySpacingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\RequireConstructorPropertyPromotionSniff;
 use SlevomatCodingStandard\Sniffs\Classes\RequireMultiLineMethodSignatureSniff;
-use SlevomatCodingStandard\Sniffs\Classes\SuperfluousAbstractClassNamingSniff;
-use SlevomatCodingStandard\Sniffs\Classes\SuperfluousTraitNamingSniff;
 use SlevomatCodingStandard\Sniffs\Classes\TraitUseDeclarationSniff;
 use SlevomatCodingStandard\Sniffs\Classes\UselessLateStaticBindingSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowContinueWithoutIntegerOperandInSwitchSniff;
@@ -288,8 +286,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->property('maxLinesCountBeforeWithoutComment', 1);
     $services->set(RequireMultiLineMethodSignatureSniff::class)
         ->property('minLineLength', $maxLineLength);
-    $services->set(SuperfluousAbstractClassNamingSniff::class);
-    $services->set(SuperfluousTraitNamingSniff::class);
     $services->set(TraitUseDeclarationSniff::class);
     $services->set(JumpStatementsSpacingSniff::class);
     $services->set(LanguageConstructWithParenthesesSniff::class);
